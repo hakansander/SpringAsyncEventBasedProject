@@ -1,9 +1,24 @@
 package com.segmentify.events.model.event;
 
-import java.util.Date;
-import java.util.UUID;
+import lombok.Getter;
+import lombok.Setter;
 
+@Getter
+@Setter
 public abstract class BaseEvent {
-    public final UUID id = UUID.randomUUID();
-    public final Date created = new Date();
+    private String name;
+    private String userId;
+    private String sessionId;
+    private String device;
+    private String userAgent;
+    private String lang;
+    private String currency;
+    private String browser;
+    private String os;
+    private String osversion;
+    private String pageUrl;
+    private String referrer;
+    private String params;
+    private String testMode;
+    private String nextPage;
 }

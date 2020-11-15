@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/add/events/")
 public class EventController {
@@ -16,7 +18,7 @@ public class EventController {
 
     @RequestMapping(value="v1.json", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public EventResponse postEvents(@RequestParam(value = "apiKey") String apiKey,
-                                    @RequestBody EventRequest[] eventRequest) {
+                                    @RequestBody List<EventRequest> eventRequest) {
 
         return eventService.postEvent(apiKey, eventRequest);
 

@@ -1,34 +1,48 @@
 package com.segmentify.events.model.request;
 
+import com.segmentify.events.model.event.BaseEvent;
 import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.util.List;
-
 @Data
 @Getter
 @Setter
-public class EventRequest {
-    String name;
-    String userId;
-    String sessionId;
-    String pageUrl;
-    String referrer;
-    String device;
-    String productId;
-    String title;
-    String inStock;
-    String url;
-    String image;
-    String category;
-    String brand;
-    String price;
-    String oldPrice;
-    String gender;
-    String colors;
-    String sizes;
-    String labels;
-    List<String> params;
+public class EventRequest extends BaseEvent {
+    private String category;
+    private String subCategory;
+    private String productId;
+    private String title;
+    private String inStock;
+    private String url;
+    private String mUrl;
+    private String image;
+    private String imageXS;
+    private String imageS;
+    private String imageM;
+    private String imageL;
+    private String imageXL;
+    private String brand;
+    private String price;
+    private String oldPrice;
+    private String currency;
+    private String gender;
+    private String colors;
+    private String sizes;
+    private String labels;
+    private String name;
+    private String userId;
+    private String sessionId;
+    private String device;
+    private String userAgent;
+    private String lang;
+    private String browser;
+    private String os;
+    private String osversion;
+    private String pageUrl;
+    private String referrer;
+    private String params;
+    private String testMode;
+    private String nextPage;
 }
 
