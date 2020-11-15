@@ -3,6 +3,8 @@ package com.segmentify.events.model.event;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.Map;
+
 @Getter
 @Setter
 public abstract class BaseEvent {
@@ -18,7 +20,7 @@ public abstract class BaseEvent {
     private String osversion;
     private String pageUrl;
     private String referrer;
-    private String params;
+    private Map<String, String> params;
     private String testMode;
     private String nextPage;
 }

@@ -5,10 +5,12 @@ import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
-@Data
+import java.util.List;
+import java.util.Map;
+
 @Getter
 @Setter
-public class EventRequest extends BaseEvent {
+public class EventRequest {
     private String category;
     private String subCategory;
     private String productId;
@@ -41,7 +43,7 @@ public class EventRequest extends BaseEvent {
     private String osversion;
     private String pageUrl;
     private String referrer;
-    private String params;
+    private Map<String,String> params;
     private String testMode;
     private String nextPage;
 }

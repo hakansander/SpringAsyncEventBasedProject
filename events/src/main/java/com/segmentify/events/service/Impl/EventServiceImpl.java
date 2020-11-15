@@ -17,6 +17,8 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+import static com.segmentify.events.util.CommonUtil.createEventResponse;
+
 @Service
 @Slf4j
 public class EventServiceImpl implements EventService {
@@ -57,9 +59,5 @@ public class EventServiceImpl implements EventService {
             eventStore.addEvent(postedEvent.getUserId(), postedEvent);
         }
 
-    }
-
-    private EventResponse createEventResponse(HttpStatus httpStatus) {
-        return new EventResponse(TimeUtil.getCurrentUnixTimestamp(), Integer.toString(httpStatus.value()));
     }
 }
