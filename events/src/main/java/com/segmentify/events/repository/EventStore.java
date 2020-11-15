@@ -22,8 +22,4 @@ public class EventStore {
             events.add(event);
         }
     }
-
-    public List<BaseEvent> getEvents(String id) {
-        return store.get(id);
-    }
 }

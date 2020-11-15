@@ -6,5 +6,6 @@ import com.segmentify.events.model.response.EventResponse;
 import java.util.List;
 
 public interface EventService {
-    EventResponse postEvent(String apiKey, List<EventRequest> eventRequest);
+    EventResponse checkPostEventRequest(String apiKey, List<EventRequest> eventRequest);
+    void storeEvents(String apiKey, List<EventRequest> eventRequest);
 }
