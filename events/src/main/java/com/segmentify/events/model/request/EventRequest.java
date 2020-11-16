@@ -1,15 +1,14 @@
 package com.segmentify.events.model.request;
 
-import com.segmentify.events.model.event.BaseEvent;
-import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
-import java.util.List;
 import java.util.Map;
 
 @Getter
 @Setter
+@ToString
 public class EventRequest {
     private String category;
     private String subCategory;

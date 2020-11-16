@@ -1,6 +1,6 @@
 package com.segmentify.events.repository;
 
-import com.segmentify.events.model.event.BaseEvent;
+import com.segmentify.events.model.dao.BaseEvent;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;

@@ -1,17 +1,17 @@
 package com.segmentify.events.service.Impl;
 
-import com.segmentify.events.model.event.BaseEvent;
-import com.segmentify.events.model.event.PageViewPostedEvent;
-import com.segmentify.events.model.event.ProductViewPostedEvent;
+import com.segmentify.events.model.enums.StatusCodeConstants;
+import com.segmentify.events.model.dao.BaseEvent;
+import com.segmentify.events.model.dao.PageViewPostedEvent;
+import com.segmentify.events.model.dao.ProductViewPostedEvent;
 import com.segmentify.events.model.request.EventRequest;
 import com.segmentify.events.model.response.EventResponse;
 import com.segmentify.events.repository.EventStore;
 import com.segmentify.events.service.EventService;
-import com.segmentify.events.util.TimeUtil;
+import com.segmentify.events.util.FormatUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
@@ -33,11 +33,24 @@ public class EventServiceImpl implements EventService {
 
         if(eventRequest.isEmpty()) {
             log.error("[checkPostEventRequest] The event list is empty :: apiKey={}", apiKey);
-            return createEventResponse(HttpStatus.NO_CONTENT);
+            return createEventResponse(StatusCodeConstants.NO_EVENT);
+        }
+
+        for (EventRequest event : eventRequest) {
+            if(event.getUserId() == null) {
+                log.error("[checkPostEventRequest] The user id is missing for the event :: apiKey={}, event={}", apiKey, event);
+                return createEventResponse(StatusCodeConstants.NO_USERID);
+            } else if(event.getSessionId() == null) {
+                log.error("[checkPostEventRequest] The session id is missing for the event :: apiKey={}, event={}", apiKey, event);
+                return createEventResponse(StatusCodeConstants.NO_SESSIONID);
+            } else if(event.getName().equals(PAGE_VIEW) && !FormatUtil.isPageViewCategoryValid(event.getCategory())) {
+                log.error("[checkPostEventRequest] The page view category name is wrong :: apiKey={}, category={}", apiKey, event.getCategory());
+                return createEventResponse(StatusCodeConstants.BAD_INPUT);
+            }
         }
 
         log.info("[checkPostEventRequest] Events are successfully stored :: apiKey={}, eventRequest={}", apiKey, eventRequest);
-        return createEventResponse(HttpStatus.OK);
+        return createEventResponse(StatusCodeConstants.SUCCESS);
     }
 
     @Async("asyncExecutor")
@@ -56,8 +69,9 @@ public class EventServiceImpl implements EventService {
                 BeanUtils.copyProperties(event, postedEvent);
             }
 
-            eventStore.addEvent(postedEvent.getUserId(), postedEvent);
+            if(postedEvent != null) {
+                eventStore.addEvent(postedEvent.getUserId(), postedEvent);
+            }
         }
-
     }
 }
