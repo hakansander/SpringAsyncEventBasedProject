@@ -10,7 +10,7 @@ public class FormatUtil {
         }
 
         for (PageViewConstants c : PageViewConstants.values()) {
-            if (c.getResultCode().equals(pageViewConstant)) {
+            if (c.getPageViewConstant().equals(pageViewConstant)) {
                 return true;
             }
         }

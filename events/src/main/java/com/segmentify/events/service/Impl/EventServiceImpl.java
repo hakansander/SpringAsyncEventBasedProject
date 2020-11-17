@@ -43,7 +43,10 @@ public class EventServiceImpl implements EventService {
             } else if(event.getSessionId() == null) {
                 log.error("[checkPostEventRequest] The session id is missing for the event :: apiKey={}, event={}", apiKey, event);
                 return createEventResponse(StatusCodeConstants.NO_SESSIONID);
-            } else if(event.getName().equals(PAGE_VIEW) && !FormatUtil.isPageViewCategoryValid(event.getCategory())) {
+            } else if(event.getName() == null) {
+                log.error("[checkPostEventRequest] The event name is null :: apiKey={}, eventName={}", apiKey, event.getName());
+                return createEventResponse(StatusCodeConstants.BAD_INPUT);
+            } else if(PAGE_VIEW.equals(event.getName()) && !FormatUtil.isPageViewCategoryValid(event.getCategory())) {
                 log.error("[checkPostEventRequest] The page view category name is wrong :: apiKey={}, category={}", apiKey, event.getCategory());
                 return createEventResponse(StatusCodeConstants.BAD_INPUT);
             }

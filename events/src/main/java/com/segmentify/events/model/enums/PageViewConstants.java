@@ -9,13 +9,13 @@ public enum PageViewConstants {
     SEARCH_PAGE("Search Page"),
     PAGE_NOT_FOUND("404 Page");
 
-    private String resultCode;
+    private String pageViewConstant;
 
-    PageViewConstants(String resultCode) {
-        this.resultCode = resultCode;
+    PageViewConstants(String pageViewConstant) {
+        this.pageViewConstant = pageViewConstant;
     }
 
-    public String getResultCode() {
-        return resultCode;
+    public String getPageViewConstant() {
+        return pageViewConstant;
     }
 }

@@ -1,5 +1,6 @@
 package com.segmentify.events.model.request;
 
+import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -8,6 +9,7 @@ import java.util.Map;
 
 @Getter
 @Setter
+@Builder
 @ToString
 public class EventRequest {
     private String category;
