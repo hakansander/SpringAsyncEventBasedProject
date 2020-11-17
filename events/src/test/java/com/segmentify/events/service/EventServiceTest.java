@@ -82,7 +82,7 @@ public class EventServiceTest {
     }
 
     @Test
-    public void noUserId() {
+    public void noUserIdGiven() {
         List<EventRequest> mockEventRequestList = new ArrayList<>();
 
         EventRequest mockEventRequest =  EventRequest.builder()
@@ -98,7 +98,7 @@ public class EventServiceTest {
     }
 
     @Test
-    public void noSessionId() {
+    public void noSessionIdGiven() {
         List<EventRequest> mockEventRequestList = new ArrayList<>();
 
         EventRequest mockEventRequest =  EventRequest.builder()
