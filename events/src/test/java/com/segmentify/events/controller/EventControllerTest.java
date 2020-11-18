@@ -18,18 +18,16 @@ import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.util.LinkedMultiValueMap;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 
-
 @WebMvcTest
 public class EventControllerTest {
-
     @Autowired
     private MockMvc mockMvc;
 
@@ -46,11 +44,10 @@ public class EventControllerTest {
     }
 
     @Test
-    public void testPostExample() throws Exception {
-        EventResponse eventResponse = new EventResponse();
-        eventResponse.setStatusCode(StatusCodeConstants.SUCCESS.toString());
-        eventResponse.setTimestamp(mockTimestamp);
-        Mockito.when(eventService.checkPostEventRequest(ArgumentMatchers.any(),ArgumentMatchers.any())).thenReturn(eventResponse);
+    void successfulPostRequest_shouldReturnSuccess() throws Exception {
+        EventResponse mockEventResponse = new EventResponse(mockTimestamp, StatusCodeConstants.SUCCESS.toString());
+
+        Mockito.when(eventService.checkPostEventRequest(ArgumentMatchers.any(),ArgumentMatchers.any())).thenReturn(mockEventResponse);
 
         EventRequest mockEventRequest =  EventRequest.builder()
                 .userId("xxxx")
@@ -70,13 +67,64 @@ public class EventControllerTest {
             e.printStackTrace();
         }
 
-        LinkedMultiValueMap<String, String> requestParams = new LinkedMultiValueMap<>();
-        requestParams.add("apiKey", "1");
-
-
         mockMvc.perform(post("/add/events/v1.json").param("apiKey", "xxxxx").contentType(MediaType.APPLICATION_JSON).characterEncoding("utf-8")
                 .content(json).accept(MediaType.APPLICATION_JSON))
                 .andExpect(jsonPath("$.statusCode", Matchers.equalTo(StatusCodeConstants.SUCCESS.toString())))
                 .andExpect(jsonPath("$.timestamp", Matchers.equalTo(mockTimestamp)));
     }
+
+    @Test
+    void invalidPath_shouldReturnWrongPath() throws Exception {
+        mockMvc.perform(post("/add/events/v4.json").param("apiKey", "xxxxx").contentType(MediaType.APPLICATION_JSON).characterEncoding("utf-8")
+                .content("[]").accept(MediaType.APPLICATION_JSON))
+                .andExpect(jsonPath("$.statusCode", Matchers.equalTo(StatusCodeConstants.WRONG_PATH.toString())))
+                .andExpect(jsonPath("$.timestamp", Matchers.notNullValue()));
+    }
+
+    @Test
+    void invalidMethodType_shouldReturnMethodNotAllowed() throws Exception {
+        mockMvc.perform(get("/add/events/v1.json").param("apiKey", "xxxxx").contentType(MediaType.APPLICATION_JSON).characterEncoding("utf-8")
+                .content("[]").accept(MediaType.APPLICATION_JSON))
+                .andExpect(jsonPath("$.statusCode", Matchers.equalTo(StatusCodeConstants.METHOD_NOT_ALLOWED.toString())))
+                .andExpect(jsonPath("$.timestamp", Matchers.notNullValue()));
+    }
+
+
+    @Test
+    void invalidJson_shouldReturnBadInput() throws Exception {
+        mockMvc.perform(post("/add/events/v1.json").param("apiKey", "xxxxx").contentType(MediaType.APPLICATION_JSON).characterEncoding("utf-8")
+                .content("]").accept(MediaType.APPLICATION_JSON))
+                .andExpect(jsonPath("$.statusCode", Matchers.equalTo(StatusCodeConstants.BAD_INPUT.toString())))
+                .andExpect(jsonPath("$.timestamp", Matchers.notNullValue()));
+    }
+
+    @Test
+    void nullEventName_shouldReturnBadInput() throws Exception {
+        EventResponse mockEventResponse = new EventResponse(mockTimestamp, StatusCodeConstants.BAD_INPUT.toString());
+
+        Mockito.when(eventService.checkPostEventRequest(ArgumentMatchers.any(),ArgumentMatchers.any())).thenReturn(mockEventResponse);
+
+        EventRequest mockEventRequest =  EventRequest.builder()
+                .userId("xxxx")
+                .sessionId("yyyy")
+                .category(PageViewConstants.CATEGORY_PAGE.getPageViewConstant())
+                .build();
+
+        String json = null;
+        List<EventRequest> listArr = new ArrayList<>();
+
+        try {
+            listArr.add(mockEventRequest);
+            json = mapper.writeValueAsString(listArr);
+
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
+        }
+
+        mockMvc.perform(post("/add/events/v1.json").param("apiKey", "xxxxx").contentType(MediaType.APPLICATION_JSON).characterEncoding("utf-8")
+                .content(json).accept(MediaType.APPLICATION_JSON))
+                .andExpect(jsonPath("$.statusCode", Matchers.equalTo(StatusCodeConstants.BAD_INPUT.toString())))
+                .andExpect(jsonPath("$.timestamp", Matchers.equalTo(mockTimestamp)));
+    }
+
 }

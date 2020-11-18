@@ -1,0 +1,17 @@
+.gradle/
+.settings/
+.project
+.classpath
+.idea
+.iml
+.log
+
+bin/
+deploy/
+target/
+build/
+*.class
+gradlew.bat
+gradlew
+*/out/
+mcare-gradle-plugin/gradle/wrapper/gradle-wrapper.properties

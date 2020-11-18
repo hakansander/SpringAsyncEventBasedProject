@@ -27,7 +27,7 @@ public class EventServiceTest {
     private String mockApiKey = "xxxx-yyyy";
 
     @Test
-    public void successfulEvent() {
+    public void successfulEvent_shouldReturnSuccess() {
         List<EventRequest> mockEventRequestList = new ArrayList<>();
 
         EventRequest mockEventRequest =  EventRequest.builder()
@@ -46,7 +46,7 @@ public class EventServiceTest {
     }
 
     @Test
-    public void nullEventName() {
+    public void nullEventName_shouldReturnBadInput() {
         List<EventRequest> mockEventRequestList = new ArrayList<>();
 
         EventRequest mockEventRequest =  EventRequest.builder()
@@ -63,7 +63,7 @@ public class EventServiceTest {
     }
 
     @Test
-    public void invalidPageViewCategory() {
+    public void invalidPageViewCategory_shouldReturnBadInput() {
         List<EventRequest> mockEventRequestList = new ArrayList<>();
 
         EventRequest mockEventRequest =  EventRequest.builder()
@@ -82,7 +82,7 @@ public class EventServiceTest {
     }
 
     @Test
-    public void noUserIdGiven() {
+    public void nullUserId_shouldReturnNoUserId() {
         List<EventRequest> mockEventRequestList = new ArrayList<>();
 
         EventRequest mockEventRequest =  EventRequest.builder()
@@ -98,7 +98,7 @@ public class EventServiceTest {
     }
 
     @Test
-    public void noSessionIdGiven() {
+    public void nullSessionId_shouldReturnNoSessionId() {
         List<EventRequest> mockEventRequestList = new ArrayList<>();
 
         EventRequest mockEventRequest =  EventRequest.builder()
@@ -114,7 +114,7 @@ public class EventServiceTest {
     }
 
     @Test
-    public void nullEventRequest() {
+    public void nullEventRequest_shouldReturnNoEvent() {
         List<EventRequest> mockEventRequestList = new ArrayList<>();
 
         EventResponse eventResponse = eventService.checkPostEventRequest(mockApiKey, mockEventRequestList);
