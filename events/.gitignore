@@ -1,4 +1,3 @@
-.gradle/
 .settings/
 .project
 .classpath
@@ -11,7 +10,4 @@ deploy/
 target/
 build/
 *.class
-gradlew.bat
-gradlew
 */out/
-mcare-gradle-plugin/gradle/wrapper/gradle-wrapper.properties
