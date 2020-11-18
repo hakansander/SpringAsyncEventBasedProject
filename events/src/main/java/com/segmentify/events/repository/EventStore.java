@@ -10,9 +10,22 @@ import java.util.Map;
 
 @Repository
 public class EventStore {
-    private Map<String, List<BaseEvent>> store = new HashMap<>();
+    private static EventStore singleInstance = null;
+    private Map<String, List<BaseEvent>> store = null;
 
-    public synchronized void addEvent(String id, BaseEvent event) {
+    private EventStore() {
+        store = new HashMap<>();
+    }
+
+    public synchronized static EventStore getInstance()
+    {
+        if (singleInstance == null)
+            singleInstance = new EventStore();
+
+        return singleInstance;
+    }
+
+    public void addEvent(String id, BaseEvent event) {
         List<BaseEvent> events = store.get(id);
         if (events == null) {
             events = new ArrayList<BaseEvent>();
