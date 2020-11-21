@@ -1,0 +1,229 @@
+{
+	"info": {
+		"_postman_id": "ae7d5fb9-5922-4a08-885a-7d63d9903858",
+		"name": "Segmentify",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "SuccessMultiple",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "[\r\n    {\r\n        \"name\": \"PAGE_VIEW\",\r\n        \"userId\": \"XXXX\",\r\n        \"sessionId\": \"YYYY\",\r\n        \"pageUrl\": \"http://www.exampleshop.com/\",\r\n        \"referrer\": \"\",\r\n        \"category\": \"Home Page\",\r\n        \"device\": \"IOS\"\r\n    },\r\n    {\r\n        \"name\": \"PRODUCT_VIEW\",\r\n        \"userId\": \"XXXX\",\r\n        \"sessionId\": \"YYYY\",\r\n        \"params\": {\r\n            \"field1\": \"value1\",\r\n            \"field2\": \"value2\"\r\n        }\r\n    }\r\n]",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/add/events/v1.json?apiKey=XXXXXXXX-XXXX-XXXX",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"add",
+						"events",
+						"v1.json"
+					],
+					"query": [
+						{
+							"key": "apiKey",
+							"value": "XXXXXXXX-XXXX-XXXX"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "InvalidJson",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "[\r\n    {\r\n        \"name\": \"PAGE_VIEW\",\r\n        \"userId\": \"XXXX\",\r\n        \"sessionId\": \"YYYY\",\r\n        \"pageUrl\": \"http://www.exampleshop.com/\",\r\n        \"referrer\": \"\",\r\n        \"category\": \"Home Page\",\r\n        \"devi\r\n    },\r\n    {\r\n        \"name\": \"PRODUCT_VIEW\",\r\n        \"userId\": \"XXXX\",\r\n        \"sessionId\": \"YYYY\",\r\n        \"params\": {\r\n            \"field1\": \"value1\",\r\n            \"field2\": \"value2\"\r\n        }\r\n    }\r\n]",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/add/events/v1.json?apiKey=XXXXXXXX-XXXX-XXXX",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"add",
+						"events",
+						"v1.json"
+					],
+					"query": [
+						{
+							"key": "apiKey",
+							"value": "XXXXXXXX-XXXX-XXXX"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "InvalidMethodType",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "[\r\n    {\r\n        \"name\": \"PAGE_VIEW\",\r\n        \"userId\": \"XXXX\",\r\n        \"sessionId\": \"YYYY\",\r\n        \"pageUrl\": \"http://www.exampleshop.com/\",\r\n        \"referrer\": \"\",\r\n        \"category\": \"Home Page\",\r\n        \"device\": \"IOS\"\r\n    },\r\n    {\r\n        \"name\": \"PRODUCT_VIEW\",\r\n        \"userId\": \"XXXX\",\r\n        \"sessionId\": \"YYYY\",\r\n        \"params\": {\r\n            \"field1\": \"value1\",\r\n            \"field2\": \"value2\"\r\n        }\r\n    }\r\n]",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/add/events/v1.json?apiKey=XXXXXXXX-XXXX-XXXX",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"add",
+						"events",
+						"v1.json"
+					],
+					"query": [
+						{
+							"key": "apiKey",
+							"value": "XXXXXXXX-XXXX-XXXX"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "InvalidPath",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "[\r\n    {\r\n        \"name\": \"PAGE_VIEW\",\r\n        \"userId\": \"XXXX\",\r\n        \"sessionId\": \"YYYY\",\r\n        \"pageUrl\": \"http://www.exampleshop.com/\",\r\n        \"referrer\": \"\",\r\n        \"category\": \"Home Page\",\r\n        \"device\": \"IOS\"\r\n    },\r\n    {\r\n        \"name\": \"PRODUCT_VIEW\",\r\n        \"userId\": \"XXXX\",\r\n        \"sessionId\": \"YYYY\",\r\n        \"params\": {\r\n            \"field1\": \"value1\",\r\n            \"field2\": \"value2\"\r\n        }\r\n    }\r\n]",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/add/events/v?apiKey=XXXXXXXX-XXXX-XXXX",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"add",
+						"events",
+						"v"
+					],
+					"query": [
+						{
+							"key": "apiKey",
+							"value": "XXXXXXXX-XXXX-XXXX"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "SuccessPageView",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "[\r\n    {\r\n        \"name\": \"PAGE_VIEW\",\r\n        \"userId\": \"XXXX\",\r\n        \"sessionId\": \"YYYY\",\r\n        \"pageUrl\": \"http://www.exampleshop.com/\",\r\n        \"referrer\": \"\",\r\n        \"category\": \"Home Page\",\r\n        \"device\": \"IOS\"\r\n    }\r\n]",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/add/events/v1.json?apiKey=XXXXXXXX-XXXX-XXXX",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"add",
+						"events",
+						"v1.json"
+					],
+					"query": [
+						{
+							"key": "apiKey",
+							"value": "XXXXXXXX-XXXX-XXXX"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "SuccessProductView",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "[\r\n    {\r\n        \"name\": \"PRODUCT_VIEW\",\r\n        \"userId\": \"XXXX\",\r\n        \"sessionId\": \"YYYY\",\r\n        \"params\": {\r\n            \"field1\": \"value1\",\r\n            \"field2\": \"value2\"\r\n        }\r\n    }\r\n]",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/add/events/v1.json?apiKey=XXXXXXXX-XXXX-XXXX",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"add",
+						"events",
+						"v1.json"
+					],
+					"query": [
+						{
+							"key": "apiKey",
+							"value": "XXXXXXXX-XXXX-XXXX"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}
